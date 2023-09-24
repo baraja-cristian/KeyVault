@@ -10,6 +10,7 @@ from tkinter import font
 from ventana_login import *
 from ventana_home import *
 
+
 class DB():
     def __init__(self, window, frame_login, message):
         self.frame_login = frame_login
@@ -33,7 +34,7 @@ class DB():
         if self.resultado:
             self.ventana_home = ventana_hom(self.window, self.resultado, self.cursor, self.connection)  # Crear una instancia de ventana_hom
             self.ventana_home.mostrar_ventana()
-
+            
         else:
             #Mensaje de erro de usuario y clave
             self.message("Usuario o clave incorrecta", "#F2C12E", self.frame_login)

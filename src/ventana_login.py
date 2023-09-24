@@ -4,6 +4,7 @@ from conecction_DB import *
 from PIL import ImageTk, Image
 import os
 
+from registrar import *
 
 class ventana_login():
     def __init__(self, window):
@@ -134,8 +135,8 @@ class ventan_registrar():
 
         label_txt_numero_email = Label(labelFrame, text="Ingrese su email",bg="#000000", fg="#FFFAEF")
         label_txt_numero_email.grid(row=2, column=1, pady=5, padx=20)
-        self.entry_telefono = Entry(labelFrame, borderwidth=0)
-        self.entry_telefono.grid(row=3, column=1, pady=5,padx=20)
+        self.entry_email = Entry(labelFrame, borderwidth=0)
+        self.entry_email.grid(row=3, column=1, pady=5,padx=20)
 
         label_txt_contrasena = Label(labelFrame, text="Ingrese una contraseña",bg="#000000", fg="#FFFAEF")
         label_txt_contrasena.grid(row=4, column=0, pady=5, padx=20)
@@ -152,7 +153,7 @@ class ventan_registrar():
 
         btn_crear_C_img = ImageTk.PhotoImage(Image.open(os.path.join(c_img, "btn_crear_cuenta.png")).resize((115,43)))
 
-        btn_crearC_ = ttk.Button(labelFrame, image=btn_crear_C_img,)
+        btn_crearC_ = ttk.Button(labelFrame, image=btn_crear_C_img, command=self.registro_vacio)
         btn_crearC_.config(width=30, style="style_btn_register_.TButton")
         btn_crearC_.btn_crear_C_img=btn_crear_C_img
         btn_crearC_.grid(row=7, column=1)
@@ -162,6 +163,9 @@ class ventan_registrar():
         btn_crear_cerrar.config(width=30, style="style_btn_register_.TButton")
         btn_crear_cerrar.btn_crear_cerrar_img=btn_crear_cerrar_img
         btn_crear_cerrar.grid(row=7, column=0)
-    
+
+    def registro_vacio(self):
+        self.enviar_datos_registro = registrar(self.entry_nombre.get(), self.entry_apellido.get(), self.entry_telefono.get(), self.entry_email.get(), self.entry_contrasena.get(), self.entry_pin.get())
+        self.enviar_datos_registro.enviarDB()
     def salir(self):
         self.vn_resgistrar.destroy()
